@@ -9,6 +9,7 @@ on:
 jobs:
   run:
     runs-on: ubuntu-latest
+    environment: 'france.x2.france.travian.com'
     permissions:
       contents: read
       packages: read
