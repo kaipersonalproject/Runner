@@ -1,0 +1,24 @@
+name: Run Map.sql fetch script
+on:
+  workflow_dispatch:
+  schedule:
+  # from RELEASE POLARBEAR 1171.1, map.sql is updated every midnight server time
+  # (which is 00:00 GMT+1 or 23:00 GMT)
+  # we execute after 2 hour to make sure map.sql updated 
+    - cron:  00 02 * * *
+jobs:
+  run:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      packages: read
+    steps:
+      - name: Login to Docker Hub
+        uses: docker/login-action@v3
+        with:
+          registry: ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+      - name: Run
+        run: |
+          docker run --rm ghcr.io/${{ github.repository_owner }}/mapsql:latest MapSqlSettings:ServerUrl=${{ secrets.SERVER_URL }} MapSqlSettings:ConnectionString=${{ secrets.CONNECTIONSTRING }}
