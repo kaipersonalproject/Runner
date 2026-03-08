@@ -22,4 +22,4 @@ jobs:
           password: ${{ secrets.GITHUB_TOKEN }}
       - name: Run
         run: |
-          docker run --rm ghcr.io/${{ github.repository_owner }}/mapsql:latest MapSqlSettings:ServerUrl=${{ vars.SERVER_URL }} MapSqlSettings:ConnectionString=${{ secrets.CONNECTIONSTRING }}
+          docker run --rm ghcr.io/${{ github.repository_owner }}/mapsql:latest MapSqlSettings:ServerUrl="${{ vars.SERVER_URL }}" MapSqlSettings:ConnectionString="${{ secrets.CONNECTIONSTRING }}"
