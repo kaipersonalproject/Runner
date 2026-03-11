@@ -19,7 +19,7 @@ jobs:
           password: ${{ secrets.GITHUB_TOKEN }}
       - name: Write SERVICE_ACCOUNT_CREDENTIAL to service_account_key.json
         run: |
-          echo "${{ secrets.SERVICE_ACCOUNT_CREDENTIAL }}" > service_account_key.json
+          echo "${{ secrets.SERVICE_ACCOUNT_CREDENTIAL }}" | base64 -d > service_account_key.json
   
       - name: Run Docker container
         run: |
