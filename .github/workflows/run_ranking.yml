@@ -17,10 +17,13 @@ jobs:
           registry: ghcr.io
           username: ${{ github.actor }}
           password: ${{ secrets.GITHUB_TOKEN }}
-      - name: Write secrets to .env file
+      - name: Write SERVICE_ACCOUNT_CREDENTIAL to service_account_key.json
         run: |
-          echo "MASTER_SHEET_ID="${{ secrets.MASTER_SHEET_ID }}"" >> .env
-          echo "SERVICE_ACCOUNT_CREDENTIAL=${{ secrets.SERVICE_ACCOUNT_CREDENTIAL }}" >> .env
-
-      - name: Run 
-        run: docker run --env-file .env ghcr.io/${{ github.repository_owner }}/rankings:latest
+          echo "${{ secrets.SERVICE_ACCOUNT_CREDENTIAL }}" > service_account_key.json
+  
+      - name: Run Docker container
+        run: |
+           docker run \
+             --env MASTER_SHEET_ID=${{ secrets.MASTER_SHEET_ID }} \
+             -v $(pwd)/service_account_key.json:/app/service_account_key.json \
+             ghcr.io/${{ github.repository_owner }}/rankings:latest
