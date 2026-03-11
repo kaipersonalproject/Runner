@@ -2,7 +2,7 @@ name: Run Rankings fetch script
 on:
   workflow_dispatch:
   schedule:
-    - cron: 45 * * * *
+    - cron: 15 * * * *
 jobs:
   run:
     runs-on: ubuntu-latest
