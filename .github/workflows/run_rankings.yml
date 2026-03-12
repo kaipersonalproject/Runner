@@ -2,10 +2,7 @@ name: Run Rankings fetch script
 on:
   workflow_dispatch:
   schedule:
-  # from RELEASE POLARBEAR 1171.1, map.sql is updated every midnight server time
-  # (which is 00:00 GMT+1 or 23:00 GMT)
-  # we execute after 2 hour to make sure map.sql updated 
-    - cron:  "20 * * * *"
+    - cron:  "25 * * * *"
 jobs:
   run:
     runs-on: ubuntu-latest
