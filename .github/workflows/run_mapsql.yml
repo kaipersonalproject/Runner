@@ -9,7 +9,7 @@ on:
 jobs:
   run:
     runs-on: ubuntu-latest
-    environment: 'france.x2.france.travian.com'
+    environment: 'FranceX2'
     permissions:
       contents: read
       packages: read
@@ -20,6 +20,12 @@ jobs:
           registry: ghcr.io
           username: ${{ github.actor }}
           password: ${{ secrets.GITHUB_TOKEN }}
-      - name: Run
+      - name: Write SERVICE_ACCOUNT_CREDENTIAL to service_account_key.json
         run: |
-          docker run --rm ghcr.io/${{ github.repository_owner }}/mapsql:latest MapSqlSettings:ServerUrl="${{ vars.SERVER_URL }}" MapSqlSettings:ConnectionString="${{ secrets.CONNECTIONSTRING }}"
+          echo "${{ secrets.SERVICE_ACCOUNT_CREDENTIAL }}" | base64 -d > service_account_key.json
+      - name: Run Docker container
+        run: |
+           docker run \
+             --env MASTER_SHEET_ID=${{ secrets.MASTER_SHEET_ID }} \
+             -v $(pwd)/service_account_key.json:/app/service_account_key.json \
+             ghcr.io/${{ github.repository_owner }}/mapsql:latest
