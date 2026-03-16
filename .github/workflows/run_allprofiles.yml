@@ -1,4 +1,4 @@
-name: Run Profiles fetch script
+name: Run all Profiles fetch script
 on:
   workflow_dispatch:
 jobs:
