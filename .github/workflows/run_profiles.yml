@@ -6,7 +6,10 @@ on:
 jobs:
   run:
     runs-on: ubuntu-latest
-    environment: 'FranceX2'
+    strategy:
+      matrix:
+        environment: ["FranceX2", "AmericaTs50"]
+    environment: ${{ matrix.environment }} 
     permissions:
       contents: read
       packages: read
