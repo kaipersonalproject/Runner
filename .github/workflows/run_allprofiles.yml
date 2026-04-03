@@ -4,6 +4,8 @@ on:
 jobs:
   run:
     runs-on: ubuntu-latest
+    env:
+      TZ: "Europe/Berlin"
     strategy:
       matrix:
         environment: ["FranceX2", "AmericaTs50"]
