@@ -12,6 +12,7 @@ jobs:
     env:
       TZ: "Europe/London"
     strategy:
+      fail-fast: false
       matrix:
         environment: ["FranceX2", "AmericaTs50"]
     environment: ${{ matrix.environment }} 
