@@ -11,7 +11,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        environment: ["FranceX2", "AmericaTs50"]
+        environment: ["FranceX2"]
     environment: ${{ matrix.environment }} 
     permissions:
       contents: read
