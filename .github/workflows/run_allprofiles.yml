@@ -9,7 +9,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        environment: ["FranceX2"]
+        environment: ["TS32_X3_INTERNATIONAL"]
     environment: ${{ matrix.environment }} 
     permissions:
       contents: read
