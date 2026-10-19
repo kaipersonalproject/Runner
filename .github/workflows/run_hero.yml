@@ -36,6 +36,3 @@ jobs:
              --env TZ="Europe/London" \
              -v $(pwd)/service_account_key.json:/app/service_account_key.json \
              ghcr.io/${{ github.repository_owner }}/hero:latest
-      - name: Stop Container Cleanly
-        if: always() # 💡 Ensures this cleanup runs even if previous steps failed
-        run: docker stop fetcher_service && docker rm fetcher_service
