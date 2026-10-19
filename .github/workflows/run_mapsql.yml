@@ -32,6 +32,8 @@ jobs:
       - name: Run Docker container
         run: |
            docker run \
+             --init \
+             --rm \
              --env MASTER_SHEET_ID=${{ secrets.MASTER_SHEET_ID }} \
              --env TZ="Europe/London" \
              -v $(pwd)/service_account_key.json:/app/service_account_key.json \
